@@ -439,6 +439,20 @@ const LoginScreen = () => {
             Sichere Verbindung • Server: 212.227.57.238
           </Text>
         </View>
+
+        {/* Registration Modal */}
+        <Modal
+          visible={showRegister}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setShowRegister(false)}
+        >
+          <RegisterModal
+            onClose={() => setShowRegister(false)}
+            colors={colors}
+            dynamicStyles={dynamicStyles}
+          />
+        </Modal>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
