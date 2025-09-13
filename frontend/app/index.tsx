@@ -218,28 +218,6 @@ const LoginScreen = () => {
     }
   };
 
-  // Auto-register demo user
-  const createDemoUser = async () => {
-    try {
-      const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
-      await axios.post(`${API_URL}/api/auth/register`, {
-        email: 'demo@stadtwache.de',
-        username: 'Demo Wächter',
-        password: 'demo123',
-        role: 'admin',
-        department: 'Demo Revier',
-        badge_number: 'DEMO001'
-      });
-      console.log('✅ Demo user created');
-    } catch (error) {
-      console.log('Demo user might already exist');
-    }
-  };
-
-  useEffect(() => {
-    createDemoUser();
-  }, []);
-
   const dynamicStyles = StyleSheet.create({
     container: {
       flex: 1,
