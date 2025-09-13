@@ -411,6 +411,16 @@ const LoginScreen = () => {
               </>
             )}
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={dynamicStyles.registerLink}
+            onPress={() => setShowRegister(true)}
+            activeOpacity={0.7}
+          >
+            <Text style={dynamicStyles.registerLinkText}>
+              Noch kein Konto? Jetzt registrieren
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <View style={dynamicStyles.footer}>
