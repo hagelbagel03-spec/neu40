@@ -398,13 +398,6 @@ const LoginScreen = () => {
               </>
             )}
           </TouchableOpacity>
-
-          <View style={dynamicStyles.demoInfo}>
-            <Text style={dynamicStyles.demoText}>🔑 Demo-Zugang</Text>
-            <Text style={dynamicStyles.demoSubtext}>
-              Automatisch mit Demo-Daten vorausgefüllt
-            </Text>
-          </View>
         </View>
 
         <View style={dynamicStyles.footer}>
