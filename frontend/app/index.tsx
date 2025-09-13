@@ -458,6 +458,163 @@ const LoginScreen = () => {
   );
 };
 
+const RegisterModal = ({ onClose, colors, dynamicStyles }) => {
+  const { register } = useAuth();
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    role: 'wächter',
+    department: '',
+    badge_number: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleRegister = async () => {
+    setError('');
+    
+    if (!formData.email || !formData.username || !formData.password || !formData.department || !formData.badge_number) {
+      setError('Bitte füllen Sie alle Felder aus.');
+      return;
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwörter stimmen nicht überein.');
+      return;
+    }
+    
+    if (formData.password.length < 6) {
+      setError('Passwort muss mindestens 6 Zeichen lang sein.');
+      return;
+    }
+
+    setLoading(true);
+    const result = await register({
+      email: formData.email,
+      username: formData.username,
+      password: formData.password,
+      role: formData.role,
+      department: formData.department,
+      badge_number: formData.badge_number
+    });
+
+    if (result.success) {
+      Alert.alert(
+        'Registrierung erfolgreich',
+        'Ihr Konto wurde erstellt. Sie können sich jetzt anmelden.',
+        [{ text: 'OK', onPress: onClose }]
+      );
+    } else {
+      setError(result.error);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <View style={dynamicStyles.modalOverlay}>
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={dynamicStyles.modalContainer}
+      >
+        <View style={dynamicStyles.modalContent}>
+          <View style={dynamicStyles.modalHeader}>
+            <Text style={dynamicStyles.modalTitle}>Registrierung</Text>
+            <TouchableOpacity onPress={onClose} style={dynamicStyles.closeButton}>
+              <Ionicons name="close" size={24} color={colors.text} />
+            </TouchableOpacity>
+          </View>
+
+          <ScrollView style={dynamicStyles.formContainer} showsVerticalScrollIndicator={false}>
+            {error ? (
+              <View style={dynamicStyles.errorContainer}>
+                <Text style={dynamicStyles.errorText}>{error}</Text>
+              </View>
+            ) : null}
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>E-Mail</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="ihre.email@stadtwache.de"
+                value={formData.email}
+                onChangeText={(text) => setFormData({...formData, email: text})}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            </View>
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>Vollständiger Name</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="Max Mustermann"
+                value={formData.username}
+                onChangeText={(text) => setFormData({...formData, username: text})}
+              />
+            </View>
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>Abteilung/Revier</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="Revier Schwelm"
+                value={formData.department}
+                onChangeText={(text) => setFormData({...formData, department: text})}
+              />
+            </View>
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>Dienstnummer</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="SW001"
+                value={formData.badge_number}
+                onChangeText={(text) => setFormData({...formData, badge_number: text})}
+              />
+            </View>
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>Passwort</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="Mindestens 6 Zeichen"
+                value={formData.password}
+                onChangeText={(text) => setFormData({...formData, password: text})}
+                secureTextEntry
+              />
+            </View>
+
+            <View style={dynamicStyles.inputGroup}>
+              <Text style={dynamicStyles.inputLabel}>Passwort bestätigen</Text>
+              <TextInput
+                style={dynamicStyles.formInput}
+                placeholder="Passwort wiederholen"
+                value={formData.confirmPassword}
+                onChangeText={(text) => setFormData({...formData, confirmPassword: text})}
+                secureTextEntry
+              />
+            </View>
+
+            <TouchableOpacity
+              style={[dynamicStyles.registerButton, loading && dynamicStyles.registerButtonDisabled]}
+              onPress={handleRegister}
+              disabled={loading}
+            >
+              {loading ? (
+                <ActivityIndicator color="#fff" size="small" />
+              ) : (
+                <Text style={dynamicStyles.registerButtonText}>Registrieren</Text>
+              )}
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
+    </View>
+  );
+};
+
 // Modern Map View for Incidents - Web-compatible version
 const IncidentMapModal = ({ visible, onClose, incident }) => {
   const { colors } = useTheme();
