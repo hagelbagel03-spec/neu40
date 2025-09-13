@@ -492,7 +492,7 @@ const RealTimeMessages: React.FC<RealTimeMessagesProps> = ({ user, token, select
           >
             <Ionicons 
               name={channel.icon as any}
-              size={18} 
+              size={16} 
               color={currentChannel === channel.key ? '#FFFFFF' : channel.color}
               style={dynamicStyles.channelIcon}
             />
