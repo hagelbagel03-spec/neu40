@@ -199,8 +199,8 @@ const AuthProvider = ({ children }) => {
 const LoginScreen = () => {
   const { login } = useAuth();
   const { colors, isDarkMode } = useTheme();
-  const [email, setEmail] = useState('demo@stadtwache.de');
-  const [password, setPassword] = useState('demo123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
