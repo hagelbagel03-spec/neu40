@@ -815,6 +815,7 @@ const MainApp = () => {
   };
 
   const loadUsersByStatus = async () => {
+    setTeamLoading(true);
     try {
       const config = token ? {
         headers: { Authorization: `Bearer ${token}` }
