@@ -174,6 +174,18 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (userData) => {
+    try {
+      const response = await axios.post(`${API_URL}/api/auth/register`, userData);
+      return { success: true, user: response.data };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.detail || 'Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.' 
+      };
+    }
+  };
+
   const updateUser = async (updatedData) => {
     const updatedUser = { ...user, ...updatedData };
     setUser(updatedUser);
@@ -189,7 +201,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading, updateUser }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout, loading, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
