@@ -579,11 +579,16 @@ async def update_report(report_id: str, updated_data: ReportCreate, current_user
         "shift_date": updated_data.shift_date,
         "updated_at": datetime.utcnow(),
         "last_edited_by": current_user.id,
-        "last_edited_by_name": current_user.username,
-        "$push": {"edit_history": edit_history_entry}
+        "last_edited_by_name": current_user.username
     }
     
-    result = await db.reports.update_one({"id": report_id}, {"$set": update_fields})
+    result = await db.reports.update_one(
+        {"id": report_id}, 
+        {
+            "$set": update_fields,
+            "$push": {"edit_history": edit_history_entry}
+        }
+    )
     
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Report not found")
