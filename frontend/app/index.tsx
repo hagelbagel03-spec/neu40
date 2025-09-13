@@ -627,6 +627,10 @@ const MainApp = () => {
     shift_date: new Date().toISOString().split('T')[0]
   });
   const [savingReport, setSavingReport] = useState(false);
+
+  // Team states
+  const [usersByStatus, setUsersByStatus] = useState({});
+  const [teamLoading, setTeamLoading] = useState(false);
   
   const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
   
