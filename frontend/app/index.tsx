@@ -1855,6 +1855,55 @@ const MainApp = () => {
       fontWeight: '600',
       marginLeft: 8,
     },
+
+    // RegisterModal Styles
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    formContainer: {
+      flex: 1,
+      padding: 20,
+    },
+    errorContainer: {
+      backgroundColor: colors.error + '20',
+      padding: 12,
+      borderRadius: 8,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: colors.error,
+    },
+    errorText: {
+      color: colors.error,
+      fontSize: 14,
+      fontWeight: '600',
+      textAlign: 'center',
+    },
+    registerButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.primary,
+      paddingVertical: 16,
+      borderRadius: 12,
+      marginTop: 24,
+      shadowColor: colors.shadow,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 8,
+    },
+    registerButtonDisabled: {
+      backgroundColor: colors.textMuted,
+    },
+    registerButtonText: {
+      color: '#FFFFFF',
+      fontSize: 16,
+      fontWeight: '700',
+      marginLeft: 8,
+    },
   });
 
   const renderHomeScreen = () => (
