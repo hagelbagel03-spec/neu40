@@ -254,10 +254,10 @@ const RealTimeMessages: React.FC<RealTimeMessagesProps> = ({ user, token, select
       borderColor: colors.primary,
     },
     channelIcon: {
-      marginRight: 8,
+      marginRight: 6,
     },
     channelTabText: {
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: '600',
       color: colors.textSecondary,
     },
