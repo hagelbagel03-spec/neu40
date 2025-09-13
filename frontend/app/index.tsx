@@ -317,6 +317,16 @@ const LoginScreen = () => {
       fontWeight: '700',
       marginLeft: 12,
     },
+    registerLink: {
+      alignItems: 'center',
+      marginTop: 24,
+      paddingVertical: 12,
+    },
+    registerLinkText: {
+      color: colors.textSecondary,
+      fontSize: 16,
+      textDecorationLine: 'underline',
+    },
     demoInfo: {
       marginTop: 24,
       padding: 20,
