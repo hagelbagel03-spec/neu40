@@ -709,6 +709,17 @@ const MainApp = () => {
     }
   };
 
+  // Create new report
+  const createNewReport = () => {
+    setEditingReport(null);
+    setReportFormData({
+      title: '',
+      content: '',
+      shift_date: new Date().toISOString().split('T')[0]
+    });
+    setShowReportModal(true);
+  };
+
   // Open report for editing
   const editReport = (report) => {
     setEditingReport(report);
